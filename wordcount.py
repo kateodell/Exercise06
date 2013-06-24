@@ -13,23 +13,18 @@ file_content = file_text.read()
 
 # initialize a dictionary
 word_count = {}
-words_in_text = file_content.split(' ')
+words_in_text = file_content.split()
 
-# count words line by line in the filetext
-# for line in file_text:
-# 	words_in_line = line.split(' ')
+
 for word in words_in_text:
 	word = word.strip(string.punctuation)
-	word = word.strip(string.whitespace)
+	# word = word.strip('\r\n\t ')
 	if word != '':
 		word = word.lower()
-		if word_count.has_key(word):
-			word_count[word] += 1
-		else:
-			word_count[word] = 1
+		word_count[word] = word_count.get(word,0) + 1
 
 # display words with sorting by value and alphabetically
-word_count_sorted = sorted(word_count.iteritems(), key= lambda word: (word[1], word[0]))
+word_count_sorted = sorted(word_count.iteritems(), key= lambda word: (word[1], word[0]), reverse = True)
 
 
 for word, count in word_count_sorted:
